@@ -14,17 +14,20 @@ const lightbox = new SimpleLightbox('.gallery a');
 
 async function fetchImages(searchQuery) {
   try {
-    const response = await axios.get(URL, {
-      params: {
-        key: API_KEY,
-        q: searchQuery,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: true,
-        per_page: 40,
-        page: page,
-      },
-    });
+    const response = await axios.get(
+      `https://pixabay.com/api/?key=${API_KEY}`,
+      {
+        params: {
+          key: API_KEY,
+          q: searchQuery,
+          image_type: 'photo',
+          orientation: 'horizontal',
+          safesearch: true,
+          per_page: 40,
+          page: page,
+        },
+      }
+    );
 
     return response.data.hits;
   } catch (error) {
