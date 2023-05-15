@@ -14,7 +14,7 @@ const lightbox = new SimpleLightbox('.gallery a');
 
 async function fetchImages(searchQuery) {
   try {
-    const response = await axios.get(`https://pixabay.com/api/`, {
+    const response = await axios.get(URL, {
       params: {
         key: API_KEY,
         q: searchQuery,
@@ -57,13 +57,7 @@ function onLoadMore() {
 }
 
 function renderGallery(images) {
-  if (!images) {
-    Notiflix.Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again.'
-    );
-    return;
-  }
-  const markup = images
+  const markup = fetchImages()
     .map(
       ({
         webformatURL,
