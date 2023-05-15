@@ -14,8 +14,10 @@ let searchQuery = '';
 const lightbox = new SimpleLightbox('.gallery a');
 
 async function fetchImages(searchQuery) {
+  const url = `${URL}&q=${searchQuery}&page=${page}`;
+
   try {
-    const response = await axios.get(`${URL}&q=${searchQuery}&page=${page}`, {
+    const response = await axios.get(url, {
       params: {
         key: API_KEY,
         q: searchQuery,
@@ -27,12 +29,23 @@ async function fetchImages(searchQuery) {
       },
     });
 
-    return fetch(response.json());
+    return fetch(url);
   } catch (error) {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
   }
+
+  if (hits.length === 0) {
+    Notiflix.Notify.warning(
+      'Sorry, there are no images matching your search query. Please try again.'
+    );
+    loadMoreBtn.classList.add('is-hidden');
+  } else if (hits.length > 0) {
+    Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+    loadMoreBtn.classList.remove('is-hidden');
+  }
+  return hits;
 }
 
 searchForm.addEventListener('submit', onSearch);
