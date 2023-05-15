@@ -34,6 +34,17 @@ async function fetchImages(searchQuery) {
   }
 }
 
+async function handleFormSubmit(event) {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+  const query = formData.get('searchQuery');
+
+  if (query.trim() === '') {
+    return;
+  }
+  const images = await fetchImages(query);
+}
 searchForm.addEventListener('submit', onSearch);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
@@ -57,7 +68,7 @@ function onLoadMore() {
 }
 
 function renderGallery(images) {
-  const markup = images
+  const markup = query
     .map(
       ({
         webformatURL,
