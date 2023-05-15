@@ -14,7 +14,7 @@ const lightbox = new SimpleLightbox('.gallery a');
 
 async function fetchImages(searchQuery) {
   try {
-    const response = await axios.get(URL, {
+    const response = await axios.get(`https://pixabay.com/api/`, {
       params: {
         key: API_KEY,
         q: searchQuery,
