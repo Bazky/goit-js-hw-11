@@ -27,23 +27,12 @@ async function fetchImages(searchQuery) {
       },
     });
 
-    return response.json();
+    return fetch(response.json());
   } catch (error) {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
   }
-
-  if (hits.length === 0) {
-    Notiflix.Notify.warning(
-      'Sorry, there are no images matching your search query. Please try again.'
-    );
-    loadMoreBtn.classList.add('is-hidden');
-  } else if (hits.length > 0) {
-    Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-    loadMoreBtn.classList.remove('is-hidden');
-  }
-  return hits;
 }
 
 searchForm.addEventListener('submit', onSearch);
