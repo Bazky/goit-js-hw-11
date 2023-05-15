@@ -57,7 +57,7 @@ function onLoadMore() {
 }
 
 function renderGallery(images) {
-  const markup = fetchImages()
+  const markup = images
     .map(
       ({
         webformatURL,
