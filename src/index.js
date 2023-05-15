@@ -29,6 +29,9 @@ async function fetchImages(searchQuery) {
       },
     });
 
+    if (response.ok) {
+      return response.json();
+    }
     return fetch(url);
   } catch (error) {
     Notiflix.Notify.failure(
