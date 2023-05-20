@@ -29,10 +29,7 @@ async function fetchImages(searchQuery) {
       },
     });
 
-    if (response.ok) {
-      return response.json();
-    }
-    return fetch(url);
+    return response.data;
   } catch (error) {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
