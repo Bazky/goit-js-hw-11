@@ -2,6 +2,7 @@ import './styles.css';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import axios from 'axios';
 
 const searchForm = document.getElementById('search-form');
 const gallery = document.querySelector('.gallery');
@@ -50,6 +51,28 @@ async function fetchImages(searchQuery) {
   }
   return hits;
 }
+// function fetchImages() {
+//   const url = `${URL}&q=${searchQuery}&page=${page}`;
+//   return fetch(url)
+//     .then(response => {
+//       if (response.ok) {
+//         return response.json();
+//       }
+//       throw new Error('Something went wrong!');
+//     })
+//     .then(({ hits, totalHits }) => {
+//       if (hits.length === 0) {
+//         Notiflix.Notify.warning(
+//           'Sorry, there are no images matching your search query. Please try again.'
+//         );
+//         loadMoreBtn.classList.add('is-hidden');
+//       } else if (hits.length > 0) {
+//         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+//         loadMoreBtn.classList.remove('is-hidden');
+//       }
+//       return hits;
+//     });
+// }
 
 searchForm.addEventListener('submit', onSearch);
 loadMoreBtn.addEventListener('click', onLoadMore);
@@ -114,26 +137,3 @@ function renderGallery(images) {
 function clearGallery() {
   gallery.innerHTML = '';
 }
-
-// function fetchImages() {
-//   const url = `${URL}&q=${searchQuery}&page=${page}`;
-//   return fetch(url)
-//     .then(response => {
-//       if (response.ok) {
-//         return response.json();
-//       }
-//       throw new Error('Something went wrong!');
-//     })
-//     .then(({ hits, totalHits }) => {
-//       if (hits.length === 0) {
-//         Notiflix.Notify.warning(
-//           'Sorry, there are no images matching your search query. Please try again.'
-//         );
-//         loadMoreBtn.classList.add('is-hidden');
-//       } else if (hits.length > 0) {
-//         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-//         loadMoreBtn.classList.remove('is-hidden');
-//       }
-//       return hits;
-//     });
-// }
