@@ -51,28 +51,6 @@ async function fetchImages(searchQuery) {
   }
   return hits;
 }
-// function fetchImages() {
-//   const url = `${URL}&q=${searchQuery}&page=${page}`;
-//   return fetch(url)
-//     .then(response => {
-//       if (response.ok) {
-//         return response.json();
-//       }
-//       throw new Error('Something went wrong!');
-//     })
-//     .then(({ hits, totalHits }) => {
-//       if (hits.length === 0) {
-//         Notiflix.Notify.warning(
-//           'Sorry, there are no images matching your search query. Please try again.'
-//         );
-//         loadMoreBtn.classList.add('is-hidden');
-//       } else if (hits.length > 0) {
-//         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-//         loadMoreBtn.classList.remove('is-hidden');
-//       }
-//       return hits;
-//     });
-// }
 
 searchForm.addEventListener('submit', onSearch);
 loadMoreBtn.addEventListener('click', onLoadMore);
@@ -108,25 +86,25 @@ function renderGallery(images) {
         comments,
         downloads,
       }) => `
-        <div class="photo-card">
-          <a href="${largeImageURL}">
-            <img src="${webformatURL}" alt="${tags}" loading="lazy" />
-          </a>
-          <div class="info">
-            <p class="info-item">
-              <b>Likes</b> ${likes}
-            </p>
-            <p class="info-item">
-              <b>Views</b> ${views}
-            </p>
-            <p class="info-item">
-              <b>Comments</b> ${comments}
-            </p>
-            <p class="info-item">
-              <b>Downloads</b> ${downloads}
-            </p>
-          </div>
-        </div>
+      <div class="photo-card">
+      <a href="${largeImageURL}">
+      <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+      </a>
+      <div class="info">
+      <p class="info-item">
+      <b>Likes</b> ${likes}
+      </p>
+      <p class="info-item">
+      <b>Views</b> ${views}
+      </p>
+      <p class="info-item">
+      <b>Comments</b> ${comments}
+      </p>
+      <p class="info-item">
+      <b>Downloads</b> ${downloads}
+      </p>
+      </div>
+      </div>
       `
     )
     .join('');
@@ -137,3 +115,26 @@ function renderGallery(images) {
 function clearGallery() {
   gallery.innerHTML = '';
 }
+
+// function fetchImages() {
+//   const url = `${URL}&q=${searchQuery}&page=${page}`;
+//   return fetch(url)
+//     .then(response => {
+//       if (response.ok) {
+//         return response.json();
+//       }
+//       throw new Error('Something went wrong!');
+//     })
+//     .then(({ hits, totalHits }) => {
+//       if (hits.length === 0) {
+//         Notiflix.Notify.warning(
+//           'Sorry, there are no images matching your search query. Please try again.'
+//         );
+//         loadMoreBtn.classList.add('is-hidden');
+//       } else if (hits.length > 0) {
+//         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+//         loadMoreBtn.classList.remove('is-hidden');
+//       }
+//       return hits;
+//     });
+// }
