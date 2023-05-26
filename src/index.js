@@ -13,60 +13,60 @@ let page = 1;
 let searchQuery = '';
 const lightbox = new SimpleLightbox('.gallery a');
 
-// async function fetchImages(searchQuery) {
-//   try {
-//     const response = await axios.get(URL, {
-//       params: {
-//         key: API_KEY,
-//         q: searchQuery,
-//         image_type: 'photo',
-//         orientation: 'horizontal',
-//         safesearch: true,
-//         per_page: 40,
-//         page: page,
-//       },
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     Notiflix.Notify.failure(
-//       'Sorry, there are no images matching your search query. Please try again.'
-//     );
-//   }
-
-//   if (hits.length === 0) {
-//     Notiflix.Notify.warning(
-//       'Sorry, there are no images matching your search query. Please try again.'
-//     );
-//     loadMoreBtn.classList.add('is-hidden');
-//   } else if (hits.length > 0) {
-//     Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-//     loadMoreBtn.classList.remove('is-hidden');
-//   }
-//   return hits;
-// }
-function fetchImages() {
-  const url = `${URL}&q=${searchQuery}&page=${page}`;
-  return fetch(url)
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('Something went wrong!');
-    })
-    .then(({ hits, totalHits }) => {
-      if (hits.length === 0) {
-        Notiflix.Notify.warning(
-          'Sorry, there are no images matching your search query. Please try again.'
-        );
-        loadMoreBtn.classList.add('is-hidden');
-      } else if (hits.length > 0) {
-        Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-        loadMoreBtn.classList.remove('is-hidden');
-      }
-      return hits;
+async function fetchImages(searchQuery) {
+  try {
+    const response = await axios.get(URL, {
+      params: {
+        key: API_KEY,
+        q: searchQuery,
+        image_type: 'photo',
+        orientation: 'horizontal',
+        safesearch: true,
+        per_page: 40,
+        page: page,
+      },
     });
+
+    return response.data;
+  } catch (error) {
+    Notiflix.Notify.failure(
+      'Sorry, there are no images matching your search query. Please try again.'
+    );
+  }
+
+  if (hits.length === 0) {
+    Notiflix.Notify.warning(
+      'Sorry, there are no images matching your search query. Please try again.'
+    );
+    loadMoreBtn.classList.add('is-hidden');
+  } else if (hits.length > 0) {
+    Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+    loadMoreBtn.classList.remove('is-hidden');
+  }
+  return hits;
 }
+// function fetchImages() {
+//   const url = `${URL}&q=${searchQuery}&page=${page}`;
+//   return fetch(url)
+//     .then(response => {
+//       if (response.ok) {
+//         return response.json();
+//       }
+//       throw new Error('Something went wrong!');
+//     })
+//     .then(({ hits, totalHits }) => {
+//       if (hits.length === 0) {
+//         Notiflix.Notify.warning(
+//           'Sorry, there are no images matching your search query. Please try again.'
+//         );
+//         loadMoreBtn.classList.add('is-hidden');
+//       } else if (hits.length > 0) {
+//         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+//         loadMoreBtn.classList.remove('is-hidden');
+//       }
+//       return hits;
+//     });
+// }
 
 searchForm.addEventListener('submit', onSearch);
 loadMoreBtn.addEventListener('click', onLoadMore);
