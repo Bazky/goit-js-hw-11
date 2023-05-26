@@ -78,6 +78,6 @@ body {
   margin-left: 45%;
 }
 
-.is-hidden {
-  display: none;
+.load-more:hover {
+  background-color: #0069d9;
 }
