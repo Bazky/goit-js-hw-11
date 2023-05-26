@@ -2,7 +2,8 @@ import './styles.css';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import axios, { isCancel, AxiosError } from 'axios';
+import axios from 'axios';
+const axios = require('axios').default;
 
 const searchForm = document.getElementById('search-form');
 const gallery = document.querySelector('.gallery');
