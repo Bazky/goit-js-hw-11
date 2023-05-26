@@ -26,8 +26,7 @@ async function fetchImages(searchQuery) {
         page: page,
       },
     });
-
-    return response.data;
+    return response.data.hits;
   } catch (error) {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
