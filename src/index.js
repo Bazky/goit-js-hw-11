@@ -4,7 +4,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import axios from 'axios';
 
-const axios = require('axios/dist/node/axios.cjs');
+const axios = require('axios');
 const searchForm = document.getElementById('search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
@@ -16,10 +16,8 @@ let searchQuery = '';
 const lightbox = new SimpleLightbox('.gallery a');
 
 async function fetchImages(searchQuery) {
-  const url = `${URL}&q=${searchQuery}&page=${page}`;
-
   try {
-    const response = await axios.get(url, {
+    const response = await axios.get(URL, {
       params: {
         key: API_KEY,
         q: searchQuery,

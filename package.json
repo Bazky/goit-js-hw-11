@@ -22,7 +22,7 @@
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.6",
     "npm": "^9.5.1",
-    "simplelightbox": "^2.14.0"
+    "simplelightbox": "^2.14.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
