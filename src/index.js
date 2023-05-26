@@ -10,11 +10,13 @@ const loadMoreBtn = document.querySelector('.load-more');
 const API_KEY = '35883323-bde325eb0a57257c02d067bfb';
 const URL = `https://pixabay.com/api/?key=${API_KEY}&image_type=photo&orientation=horizontal&safesearch=true`;
 
+let page = 1;
+let searchQuery = '';
 const lightbox = new SimpleLightbox('.gallery a');
 
 async function fetchImages() {
   try {
-    const response = await axios.get(`${URL}&q=${searchQuery}&page=${page}`, {
+    const response = await axios.get(URL, {
       params: {
         key: API_KEY,
         q: searchQuery,
