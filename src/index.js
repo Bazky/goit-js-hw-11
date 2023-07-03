@@ -13,6 +13,9 @@ const URL = `https://pixabay.com/api/?key=${API_KEY}&image_type=photo&orientatio
 let page = 1;
 let searchQuery = '';
 const lightbox = new SimpleLightbox('.gallery a');
+searchForm.addEventListener('submit', onSearch);
+loadMoreBtn.addEventListener('click', onLoadMore);
+loadMoreBtn.classList.add('is-hidden');
 
 async function fetchImages() {
   try {
@@ -27,34 +30,33 @@ async function fetchImages() {
         page: page,
       },
     });
-    return response.data.hits;
+    const { hits, totalHits } = response.data;
+    if (hits.length === 0) {
+      Notiflix.Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+      loadMoreBtn.classList.add('is-hidden');
+    } else if (hits.length > 0) {
+      Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+      loadMoreBtn.classList.remove('is-hidden');
+    }
+    return hits;
   } catch (error) {
     Notiflix.Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again.'
+      'Sorry, there was an error fetching the images. Please try again.'
     );
+    console.log(error);
   }
-
-  if (hits.length === 0) {
-    Notiflix.Notify.warning(
-      'Sorry, there are no images matching your search query. Please try again.'
-    );
-    loadMoreBtn.classList.add('is-hidden');
-  } else if (hits.length > 0) {
-    Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-    loadMoreBtn.classList.remove('is-hidden');
-  }
-  return hits;
 }
-
-searchForm.addEventListener('submit', onSearch);
-loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(event) {
   event.preventDefault();
   clearGallery();
   searchQuery = event.currentTarget.elements.searchQuery.value.trim();
   page = 1;
-  fetchImages().then(renderGallery).catch(console.log);
+  fetchImages()
+    .then(renderGallery)
+    .catch(error => console.log(error));
 }
 
 function onLoadMore() {

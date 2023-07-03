@@ -81,3 +81,7 @@ body {
 .load-more:hover {
   background-color: #0069d9;
 }
+
+.is-hidden {
+  display: none;
+}
