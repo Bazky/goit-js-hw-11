@@ -36,7 +36,7 @@ async function fetchImages() {
         'Sorry, there are no images matching your search query. Please try again.'
       );
       loadMoreBtn.classList.add('is-hidden');
-    } else if (hits.length > 0) {
+    } else if (hits.length > 0 && loadMoreBtn.classList.contains('is-hidden')) {
       Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
       loadMoreBtn.classList.remove('is-hidden');
     }
