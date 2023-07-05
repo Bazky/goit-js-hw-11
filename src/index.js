@@ -63,11 +63,21 @@ function onLoadMore() {
   page += 1;
   fetchImages()
     .then(renderGallery)
+    .then(getBoundingClientRect)
     .catch(
       Notiflix.Notify(
         "We're sorry, but you've reached the end of search results."
       )
     );
+}
+
+function getBoundingClientRect() {
+  const { height: cardHeight } =
+    gallery.firstElementChild.getBoundingClientRect();
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
 }
 
 function renderGallery(images) {
@@ -111,3 +121,11 @@ function renderGallery(images) {
 function clearGallery() {
   gallery.innerHTML = '';
 }
+
+const { height: cardHeight } =
+  gallery.firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: 'smooth',
+});
